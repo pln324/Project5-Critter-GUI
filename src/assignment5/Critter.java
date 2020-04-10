@@ -155,7 +155,7 @@ public abstract class Critter {
 		me.y_coord = Critter.getRandomInt(Params.WORLD_HEIGHT);
 		/*add the newly created critter to the population*/
 		population.add(me);
-		
+
     }
 
     
@@ -170,7 +170,7 @@ public abstract class Critter {
      */
     public static List<Critter> getInstances(String critter_class_name)
             throws InvalidCritterException {
-        
+
     	List<Critter> sameKind = new ArrayList<Critter>();
     	Class<?> newCri;
     	try {
@@ -198,7 +198,7 @@ public abstract class Critter {
     }
 
     public static void worldTimeStep() {
-        /*call doTimeStep for every critter in the world*/
+
     	for (int i=0; i<population.size(); i++) {
     		population.get(i).hasMoved = false;
     		population.get(i).doTimeStep();
@@ -229,8 +229,8 @@ public abstract class Critter {
     	/*all all babies into the world*/ 
     	population.addAll(babies);
     	babies.clear();
+
     }
-    
     
     /**
      * Calls fight for both critters in the encounter, 
@@ -284,7 +284,7 @@ public abstract class Critter {
     		}
     	}
     }
-    
+
     /**
      * returns true if two critters are in the same spot
      * 
@@ -295,6 +295,7 @@ public abstract class Critter {
     private static boolean collision(Critter a, Critter b) {
     	if (a.x_coord == b.x_coord && a.y_coord == b.y_coord && b.energy>0) return true;
     	else return false;
+
     }
     
     public abstract void doTimeStep();
@@ -312,6 +313,7 @@ public abstract class Critter {
     protected int getEnergy() {
         return energy;
     }
+
 
     /**
      * Allows critter to move one step in any direction, called in do time step
@@ -378,7 +380,7 @@ public abstract class Critter {
      * @param direction Indicates direction traveled
      */
     protected final void run(int direction) {
-    	
+
     	if (hasMoved == false) {
     		this.energy -= Params.RUN_ENERGY_COST;
 
@@ -427,8 +429,7 @@ public abstract class Critter {
         			this.y_coord += Params.WORLD_HEIGHT;
         		}
         		hasMoved = true;
-    		}
-
+    	}
     }
     
     /**
@@ -440,7 +441,7 @@ public abstract class Critter {
      * @param direction Space where child will be after creation (within one space of parent)
      */
     protected final void reproduce(Critter offspring, int direction) {
-    	
+
     	if(this.energy < Params.MIN_REPRODUCE_ENERGY) {
     		return;
     	}
