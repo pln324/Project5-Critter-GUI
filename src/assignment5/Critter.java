@@ -13,9 +13,18 @@
 
 package assignment5;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+
+
+
+
+
+
 
 /*
  * See the PDF for descriptions of the methods and fields in this
@@ -104,6 +113,8 @@ public abstract class Critter {
         rand = new Random(new_seed);
     }
 
+    
+    
     /**
      * create and initialize a Critter subclass.
      * critter_class_name must be the qualified name of a concrete
@@ -115,9 +126,40 @@ public abstract class Critter {
      */
     public static void createCritter(String critter_class_name)
             throws InvalidCritterException {
-        // TODO: Complete this method
+    	
+    	Class<?> myCritter = null;
+		Constructor<?> constructor = null;
+		Object instanceOfMyCritter = null;
+
+		try {
+			/*Class object of specified name*/
+			myCritter = Class.forName(myPackage+"."+critter_class_name); 	
+		} catch (ClassNotFoundException e) {
+			throw new InvalidCritterException(critter_class_name);
+		}
+		try {
+			/*No-parameter constructor object*/
+			constructor = myCritter.getConstructor();		
+			/*Create new object using constructor*/
+			instanceOfMyCritter = constructor.newInstance();	
+		} catch (InstantiationException|IllegalAccessException|IllegalArgumentException|NoSuchMethodException e) {
+			throw new InvalidCritterException(critter_class_name);
+		}
+		catch(InvocationTargetException e) {
+			throw new InvalidCritterException(critter_class_name);
+		}
+		Critter me = (Critter)instanceOfMyCritter;	
+		me.energy = Params.START_ENERGY;
+		/*critter will have a random (x,y) coordinate*/
+		me.x_coord = Critter.getRandomInt(Params.WORLD_WIDTH);
+		me.y_coord = Critter.getRandomInt(Params.WORLD_HEIGHT);
+		/*add the newly created critter to the population*/
+		population.add(me);
+		
     }
 
+    
+    
     /**
      * Gets a list of critters of a specific type.
      *
@@ -128,24 +170,138 @@ public abstract class Critter {
      */
     public static List<Critter> getInstances(String critter_class_name)
             throws InvalidCritterException {
-        // TODO: Complete this method
-        return null;
+        
+    	List<Critter> sameKind = new ArrayList<Critter>();
+    	Class<?> newCri;
+    	try {
+    		newCri = Class.forName(myPackage+"."+critter_class_name);
+    	}
+    	catch(ClassNotFoundException e) {
+    		throw new InvalidCritterException(critter_class_name);
+    	}
+    	for(Critter critter : population) {
+    		if(newCri.isInstance(critter)) {
+    			sameKind.add(critter);
+    		}
+    	}
+        return sameKind;
     }
 
+    
+    
     /**
      * Clear the world of all critters, dead and alive
      */
     public static void clearWorld() {
-        // TODO: Complete this method
+    	population.clear();
+    	babies.clear();
     }
 
     public static void worldTimeStep() {
-        // TODO: Complete this method
+        /*call doTimeStep for every critter in the world*/
+    	for (int i=0; i<population.size(); i++) {
+    		population.get(i).hasMoved = false;
+    		population.get(i).doTimeStep();
+    	}
+    	for (int i=0; i<population.size()-1; i++) {
+    		for (int j=i+1; j<population.size(); j++) {
+    			if (population.get(i).x_coord == population.get(j).x_coord && population.get(i).y_coord == population.get(j).y_coord) {
+    				doEncounter(population.get(i), population.get(j));
+    			}
+    		}
+    	}
+    	/*Remove dead critter from the world*/
+    	for (int i=0; i<population.size(); i++) {
+    		population.get(i).energy -= Params.REST_ENERGY_COST;
+    		if (population.get(i).energy <= 0) {
+    			population.remove(i);
+    			i--;
+    		}
+    	}
+    	/*create clover in each world time step*/
+    	for (int i=0; i<Params.REFRESH_CLOVER_COUNT; i++) {
+    		try {
+				createCritter("Clover");
+			} catch (InvalidCritterException e) {
+				e.printStackTrace();
+			}
+    	}
+    	/*all all babies into the world*/ 
+    	population.addAll(babies);
+    	babies.clear();
     }
-
+    
+    
+    /**
+     * Calls fight for both critters in the encounter, 
+     * and calculates the appropriate value for the 
+     * fight.
+     * 
+     * @param a First critter that is encountered
+     * @param b Second critter that is encountered
+     */
+    private static void doEncounter(Critter a, Critter b) {
+    	int currentx = a.x_coord;
+    	int currenty = b.y_coord;
+    	/*if a wants to fight*/
+    	boolean A = a.fight(b.toString());
+    	/*if b wants to fight*/
+    	boolean B = b.fight(a.toString());
+    	int fightA = 0;
+    	int fightB = 0;
+    		
+    	if(!A) {
+    		for (int i=0; i<population.size(); i++) {
+    			if(collision(a, population.get(i)) && !a.equals(population.get(i))) {
+    				a.x_coord = currentx;
+    				a.y_coord = currenty;
+    				i = population.size();
+   				}
+  			}
+  		}
+    	if(!B) {
+   			for (int i=0; i<population.size(); i++) {
+  				if(collision(b, population.get(i)) && !b.equals(population.get(i))) {
+ 					b.x_coord = currentx;
+   					b.y_coord = currenty;
+  					i = population.size();
+  				}
+  			}
+  		}
+    	if(a.x_coord != b.x_coord || a.y_coord != b.y_coord) {
+    			return;
+    	}
+    	else {
+    		if(A&&a.energy>0) fightA = Math.abs(getRandomInt(a.energy));
+    		if(B&&b.energy>0) fightB = Math.abs(getRandomInt(b.energy));
+   			if (fightA>fightB) {
+   				a.energy = a.energy + b.energy/2;
+   				b.energy = 0;
+   			}
+   			else {
+   				b.energy = b.energy + a.energy/2;
+    			a.energy = 0;
+    		}
+    	}
+    }
+    
+    /**
+     * returns true if two critters are in the same spot
+     * 
+     * @param a First critter
+     * @param b Second critter
+     * @return
+     */
+    private static boolean collision(Critter a, Critter b) {
+    	if (a.x_coord == b.x_coord && a.y_coord == b.y_coord && b.energy>0) return true;
+    	else return false;
+    }
+    
     public abstract void doTimeStep();
 
     public abstract boolean fight(String oponent);
+    
+    private boolean hasMoved=false;
 
     /* a one-character long string that visually depicts your critter
      * in the ASCII interface */
@@ -157,17 +313,144 @@ public abstract class Critter {
         return energy;
     }
 
+    /**
+     * Allows critter to move one step in any direction, called in do time step
+     * 
+     * @param direction Indicates direction traveled
+     */
     protected final void walk(int direction) {
-        // TODO: Complete this method
-    }
+    	
+        if (hasMoved == false) {
+        	this.energy -= Params.WALK_ENERGY_COST;
 
+        		switch(direction) {
+        		case 0:
+        			this.x_coord +=1;	//right
+        			break;
+        		case 1:
+        			this.x_coord +=1;	//diagonally up right
+        			this.y_coord -=1;
+        			break;
+        		case 2:
+        			this.y_coord -=1;	//up
+        			break;
+        		case 3:
+        			this.x_coord -=1;	//diagonally up left
+        			this.y_coord -=1;
+        			break;
+        		case 4:
+        			this.x_coord -=1;   //left
+        			break;
+        		case 5:
+        			this.x_coord -=1;	//diagonally down left
+        			this.y_coord +=1;
+        			break;
+        		case 6:
+        			this.y_coord +=1; 	//down
+        			break;
+        		case 7:
+        			this.x_coord +=1;	//diagonally down right
+        			this.y_coord +=1;
+        			break;
+        		}
+
+        	
+        		//wrap around cases
+        		if(this.x_coord>Params.WORLD_WIDTH-1) {				
+        			this.x_coord -= Params.WORLD_WIDTH;
+        		}
+        		if(this.x_coord<0) {
+        			this.x_coord += Params.WORLD_WIDTH;
+        		}
+        		if(this.y_coord>Params.WORLD_HEIGHT-1) {
+        			this.y_coord -= Params.WORLD_HEIGHT;
+        		}
+        		if(this.y_coord<0) {
+        			this.y_coord += Params.WORLD_HEIGHT;
+        		}
+        		hasMoved = true;
+        	}
+    }
+    
+    /**
+     * Allows critter to move two spaces in any direction, called from doTimeStep
+     * 
+     * @param direction Indicates direction traveled
+     */
     protected final void run(int direction) {
-        // TODO: Complete this method
+    	
+    	if (hasMoved == false) {
+    		this.energy -= Params.RUN_ENERGY_COST;
+
+        		switch(direction) {
+        		case 0:
+        			this.x_coord +=2;	//right
+        			break;
+        		case 1:
+        			this.x_coord +=2;	//diagonally up right
+        			this.y_coord -=2;
+        			break;
+        		case 2:
+        			this.y_coord -=2;	//up
+        			break;
+        		case 3:
+        			this.x_coord -=2;	//diagonally up left
+        			this.y_coord -=2;
+        			break;
+        		case 4:
+        			this.x_coord -=2;   //left
+        			break;
+        		case 5:
+        			this.x_coord -=2;	//diagonally down left
+        			this.y_coord +=2;
+        			break;
+        		case 6:
+        			this.y_coord +=2; 	//down
+        			break;
+        		case 7:
+        			this.x_coord +=2;	//diagonally down right
+        			this.y_coord +=2;
+        			break;
+        		}
+        	
+        		//wrap around cases
+        		if(this.x_coord>Params.WORLD_WIDTH-1) {				
+        			this.x_coord -= Params.WORLD_WIDTH;
+        		}
+        		if(this.x_coord<0) {
+        			this.x_coord += Params.WORLD_WIDTH;
+        		}
+        		if(this.y_coord>Params.WORLD_HEIGHT-1) {
+        			this.y_coord -= Params.WORLD_HEIGHT;
+        		}
+        		if(this.y_coord<0) {
+        			this.y_coord += Params.WORLD_HEIGHT;
+        		}
+        		hasMoved = true;
+    		}
 
     }
-
+    
+    /**
+     * Allows critter to reproduce. Gives offspring appropriate 
+     * amount of energy and adds it to babies List. Checks to
+     * make sure parent has enough energy first.
+     * 
+     * @param offspring "Child" to be created if possible
+     * @param direction Space where child will be after creation (within one space of parent)
+     */
     protected final void reproduce(Critter offspring, int direction) {
-        // TODO: Complete this method
+    	
+    	if(this.energy < Params.MIN_REPRODUCE_ENERGY) {
+    		return;
+    	}
+    	offspring.energy = this.energy/2;
+    	this.energy = (this.energy+1)/2;
+    	offspring.x_coord = this.x_coord;
+    	offspring.y_coord = this.y_coord;
+    	offspring.walk(direction);
+    	offspring.energy +=1; 				//no energy should be deducted for newborn
+    	babies.add(offspring);
     }
 
     /**
