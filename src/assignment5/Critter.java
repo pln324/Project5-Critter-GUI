@@ -16,8 +16,16 @@ package assignment5;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
+
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 
 /*
  * See the PDF for descriptions of the methods and fields in this
@@ -37,6 +45,7 @@ public abstract class Critter {
         DIAMOND,
         STAR
     }
+    
 
     /* the default color is white, which I hope makes critters invisible by default
      * If you change the background color of your View component, then update the default
@@ -64,17 +73,84 @@ public abstract class Critter {
     public abstract CritterShape viewShape();
 
     protected final String look(int direction, boolean steps) {
-        return "";
+        energy -= Params.LOOK_ENERGY_COST;
+    	int numSteps = 1;
+    	int x_view = x_coord;
+    	int y_view = y_coord;
+    	if (steps) {
+    		numSteps = 2;
+    	}
+    	switch(direction) {
+ 		case 0:
+ 			x_view +=numSteps;	//right
+ 			break;
+ 		case 1:
+ 			x_view +=numSteps;	//diagonally up right
+ 			y_view -=numSteps;
+ 			break;
+ 		case 2:
+ 			y_view -=numSteps;	//up
+ 			break;
+ 		case 3:
+ 			x_view -=numSteps;	//diagonally up left
+ 			y_view -=numSteps;
+ 			break;
+ 		case 4:
+ 			x_view -=numSteps;   //left
+ 			break;
+ 		case 5:
+ 			x_view -=numSteps;	//diagonally down left
+ 			y_view +=numSteps;
+ 			break;
+ 		case 6:
+ 			y_view +=numSteps; 	//down
+ 			break;
+ 		case 7:
+ 			x_view +=numSteps;	//diagonally down right
+ 			y_view +=numSteps;
+ 			break;
+ 		}
+    	
+    	for (int i=0; i<population.size(); i++) {
+			if (population.get(i).x_coord == x_view && population.get(i).y_coord == y_view) {
+				return population.get(i).toString();
+			}
+		}
+    	
+    	return null;
     }
 
     public static String runStats(List<Critter> critters) {
-        // TODO Implement this method
-        return null;
+    	//System.out.print("" + critters.size() + " critters as follows -- ");
+    	String stats = "" + critters.size() + " critters as follows -- "; 
+        Map<String, Integer> critter_count = new HashMap<String, Integer>();
+        for (Critter crit : critters) {
+            String crit_string = crit.toString();
+            critter_count.put(crit_string,
+                    critter_count.getOrDefault(crit_string, 0) + 1);
+        }
+        String prefix = "";
+        for (String s : critter_count.keySet()) {
+            //System.out.print(prefix + s + ":" + critter_count.get(s));
+        	stats += prefix + s + ":" + critter_count.get(s);
+            prefix = ", ";
+        }
+        //System.out.println();
+        return stats;
     }
 
 
     public static void displayWorld(Object pane) {
-        // TODO Implement this method
+        GridPane world = (GridPane)pane;
+        for(int i=0; i<Params.WORLD_HEIGHT;i++) {
+        	for(int j=0; j<Params.WORLD_WIDTH; j++) {
+        		world.add(null, j, i);
+        	}
+        }
+        for(int i=0;i<population.size();i++) {
+    		world.add(population.get(i).viewShape(),population.get(i).x_coord,population.get(i).y_coord);
+    	}
+        
     }
 
 	/* END --- NEW FOR PROJECT 5
