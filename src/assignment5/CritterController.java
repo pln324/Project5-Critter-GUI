@@ -33,6 +33,10 @@ public class CritterController {
 	    
 	    @FXML
 	    private Button seedButton;
+	    
+	    @FXML
+	    private Button quitButton;
+	    
 	    @FXML
 	    private Polygon star;
 
@@ -92,9 +96,12 @@ public class CritterController {
 		}
 	}
 	
+	public void quitButtonPressed() {
+		System.exit(0);
+	}
 	public Shape toShape(Critter me) {
 		switch(me.viewShape()) {
-		case()
+		//case()
 		}
 		return null;
 	}

@@ -28,8 +28,17 @@
          </children>
       </GridPane>
    </right>
-   <center>
-      <GridPane fx:id="root" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="158.0" prefWidth="393.0" BorderPane.alignment="CENTER">
+   <bottom>
+      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Polygon fill="DODGERBLUE" layoutX="210.0" layoutY="83.0" points="24.0, 43.4000244140625, 36.79998779296875, -20.600013732910156, -12.799972534179688, -60.600013732910156, -63.99998474121094, -20.600013732910156, -43.19999694824219, 43.4000244140625, 24.0, 43.4000244140625, 36.79998779296875, -20.600013732910156, -12.799972534179688, -60.600013732910156, -63.99998474121094, -20.600013732910156, -43.19999694824219, 43.4000244140625" stroke="BLACK" strokeType="INSIDE" />
+            <Polygon fill="DODGERBLUE" layoutX="408.0" layoutY="74.0" points="-55.471641540527344, 20.939435958862305, -4.245959758758545, -13.150818824768066, 3.9189276695251465, 25.950754165649414" rotate="22.1" stroke="BLACK" strokeType="INSIDE" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" layoutX="43.0" layoutY="60.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+         </children>
+      </Pane>
+   </bottom>
+   <left>
+      <GridPane fx:id="root" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="157.0" prefWidth="386.0" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="294.4000244140625" minWidth="10.0" prefWidth="51.7999755859375" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="294.4000244140625" minWidth="10.0" prefWidth="82.00003662109376" />
@@ -52,16 +61,8 @@
             <TextField fx:id="stepText" promptText="How many Steps?" GridPane.columnIndex="3" GridPane.rowIndex="2" />
             <TextField fx:id="seedText" layoutX="210.0" layoutY="95.0" promptText="Seed #" GridPane.columnIndex="3" GridPane.rowIndex="3" />
             <Button fx:id="seedButton" mnemonicParsing="false" onAction="#seedButtonPressed" prefHeight="26.0" prefWidth="70.0" text="Set Seed" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Button fx:id="quitButton" mnemonicParsing="false" onAction="#quitButtonPressed" prefHeight="28.0" prefWidth="70.0" text="Quit" GridPane.columnIndex="1" GridPane.rowIndex="4" />
          </children>
       </GridPane>
-   </center>
-   <bottom>
-      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-            <Polygon fill="DODGERBLUE" layoutX="210.0" layoutY="83.0" points="24.0, 43.4000244140625, 36.79998779296875, -20.600013732910156, -12.799972534179688, -60.600013732910156, -63.99998474121094, -20.600013732910156, -43.19999694824219, 43.4000244140625, 24.0, 43.4000244140625, 36.79998779296875, -20.600013732910156, -12.799972534179688, -60.600013732910156, -63.99998474121094, -20.600013732910156, -43.19999694824219, 43.4000244140625" stroke="BLACK" strokeType="INSIDE" />
-            <Polygon fill="DODGERBLUE" layoutX="408.0" layoutY="74.0" points="-55.471641540527344, 20.939435958862305, -4.245959758758545, -13.150818824768066, 3.9189276695251465, 25.950754165649414" rotate="22.1" stroke="BLACK" strokeType="INSIDE" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" layoutX="43.0" layoutY="60.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
-         </children>
-      </Pane>
-   </bottom>
+   </left>
 </BorderPane>

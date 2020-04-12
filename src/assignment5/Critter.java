@@ -112,6 +112,20 @@ public abstract class Critter {
  			break;
  		}
     	
+    	/*corner cases*/
+		if(this.x_coord>Params.WORLD_WIDTH-1) {				
+			this.x_coord -= Params.WORLD_WIDTH;
+		}
+		if(this.x_coord<0) {
+			this.x_coord += Params.WORLD_WIDTH;
+		}
+		if(this.y_coord>Params.WORLD_HEIGHT-1) {
+			this.y_coord -= Params.WORLD_HEIGHT;
+		}
+		if(this.y_coord<0) {
+			this.y_coord += Params.WORLD_HEIGHT;
+		}
+		
     	for (int i=0; i<population.size(); i++) {
 			if (population.get(i).x_coord == x_view && population.get(i).y_coord == y_view) {
 				return population.get(i).toString();
@@ -148,9 +162,9 @@ public abstract class Critter {
         		world.add(null, j, i);
         	}
         }
-        for(int i=0;i<population.size();i++) {
+    /*    for(int i=0;i<population.size();i++) {
     		world.add(population.get(i).viewShape(),population.get(i).x_coord,population.get(i).y_coord);
-    	}
+    	}*/
         
     }
 

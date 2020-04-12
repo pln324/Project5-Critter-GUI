@@ -13,8 +13,7 @@ public class Main extends Application {
 		try {
 			BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("CritterGUI.fxml"));
 			Scene scene = new Scene(root,400,400);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			Critter.displayWorld(root);
+			primaryStage.setTitle("Critter II");
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch(Exception e) {
