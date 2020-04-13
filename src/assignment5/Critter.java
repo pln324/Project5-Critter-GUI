@@ -28,6 +28,12 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.chart.*;
+import javafx.scene.chart.PieChart.Data;
+import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 
 /*
  * See the PDF for descriptions of the methods and fields in this
@@ -140,7 +146,8 @@ public abstract class Critter {
         //System.out.println();
         return stats;
     }
-
+    
+    
 
     public static void displayWorld(Object pane) {
     	BorderPane root = (BorderPane) pane;
@@ -150,6 +157,28 @@ public abstract class Critter {
 		world.setPrefHeight(Params.WORLD_HEIGHT*5);
         world.setPrefWidth(Params.WORLD_WIDTH*5);
         int size = Math.min(800/Params.WORLD_WIDTH, 850/Params.WORLD_HEIGHT);
+        
+        	pie.clear();
+        	for(int i=0;i<population.size();i++) {
+        		pieCompare = population.get(i).toString();
+        		if(!(Critter.pie.contains(pieCompare))){
+        			pie.add(pieCompare);
+        		}
+        	}
+        	
+            PieChart Chart = new PieChart();
+                for(int i=0;i<pie.size();i++) {
+					PieChart.Data data = new PieChart.Data(pie.get(i).toString(),Critter.count(pie.get(i).toString()));
+                    Chart.getData().add(data);       
+         }
+        Chart.setClockwise(true);
+        Chart.setStartAngle(0);       
+
+        Chart.setTitle("Critter Distribution");
+        root.setCenter(Chart);
+       
+        
+        
         for (int i = 0; i < Params.WORLD_WIDTH; i++) {
             ColumnConstraints colConst = new ColumnConstraints();
             colConst.setMinWidth(size);
@@ -176,7 +205,16 @@ public abstract class Critter {
     		}
     	}
     }
-
+    
+    private static int count(String toString) {
+    	int i=0;
+    	for(Critter critter: population) {
+    		if(critter.toString().equals(toString)) {
+    			i++;
+    		}
+    	}
+    	return  i;
+    }
 	/* END --- NEW FOR PROJECT 5
 			rest is unchanged from Project 4 */
 
@@ -187,7 +225,8 @@ public abstract class Critter {
 
     private static List<Critter> population = new ArrayList<Critter>();
     private static List<Critter> babies = new ArrayList<Critter>();
-
+    private static List<String> pie = new ArrayList<String>();
+    private static String pieCompare;
     /* Gets the package name.  This assumes that Critter and its
      * subclasses are all in the same package. */
     private static String myPackage;

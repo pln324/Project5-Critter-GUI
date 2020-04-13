@@ -60,7 +60,7 @@ public class CritterController {
     @FXML
     private Button clearButton;
     
-    public void CreateButtonHovered() {
+    public void CreateButtonHovered(){
 		if(Critter.getRandomInt(5)==0) {
 			CreateButton.setStyle("-fx-background-color: red; ");
 		}
@@ -76,8 +76,143 @@ public class CritterController {
 		else if(Critter.getRandomInt(5)==4) {
 			CreateButton.setStyle("-fx-background-color: orange; ");
 		}
+
 	}
     
+    public void StepButtonHovered(){
+		if(Critter.getRandomInt(5)==0) {
+			stepButton.setStyle("-fx-background-color: aqua; ");
+		}
+		else if(Critter.getRandomInt(5)==1) {
+			stepButton.setStyle("-fx-background-color: dimgray; ");
+		}
+		else if(Critter.getRandomInt(5)==2) {
+			stepButton.setStyle("-fx-background-color: pink; ");
+		}
+		else if(Critter.getRandomInt(5)==3) {
+			stepButton.setStyle("-fx-background-color: linen; ");
+		}
+		else if(Critter.getRandomInt(5)==4) {
+			stepButton.setStyle("-fx-background-color: lime; ");
+		}
+
+	}
+    
+    public void SeedButtonHovered(){
+		if(Critter.getRandomInt(5)==0) {
+			seedButton.setStyle("-fx-background-color: seagreen; ");
+		}
+		else if(Critter.getRandomInt(5)==1) {
+			seedButton.setStyle("-fx-background-color: silver; ");
+		}
+		else if(Critter.getRandomInt(5)==2) {
+			seedButton.setStyle("-fx-background-color: skyblue; ");
+		}
+		else if(Critter.getRandomInt(5)==3) {
+			seedButton.setStyle("-fx-background-color: tomato; ");
+		}
+		else if(Critter.getRandomInt(5)==4) {
+			seedButton.setStyle("-fx-background-color: violet; ");
+		}
+
+	}
+    
+    public void QuitButtonHovered(){
+		if(Critter.getRandomInt(5)==0) {
+			quitButton.setStyle("-fx-background-color: navy; ");
+		}
+		else if(Critter.getRandomInt(5)==1) {
+			quitButton.setStyle("-fx-background-color: olive; ");
+		}
+		else if(Critter.getRandomInt(5)==2) {
+			quitButton.setStyle("-fx-background-color: peru; ");
+		}
+		else if(Critter.getRandomInt(5)==3) {
+			quitButton.setStyle("-fx-background-color: plum; ");
+		}
+		else if(Critter.getRandomInt(5)==4) {
+			quitButton.setStyle("-fx-background-color: salmon; ");
+		}
+
+	}
+    
+    public void ClearButtonHovered(){
+		if(Critter.getRandomInt(5)==0) {
+			clearButton.setStyle("-fx-background-color: wheat; ");
+		}
+		else if(Critter.getRandomInt(5)==1) {
+			clearButton.setStyle("-fx-background-color: tan; ");
+		}
+		else if(Critter.getRandomInt(5)==2) {
+			clearButton.setStyle("-fx-background-color: peachpuff; ");
+		}
+		else if(Critter.getRandomInt(5)==3) {
+			clearButton.setStyle("-fx-background-color: palegreen; ");
+		}
+		else if(Critter.getRandomInt(5)==4) {
+			clearButton.setStyle("-fx-background-color: oldlace; ");
+		}
+
+	}
+    
+    public void AniButtonHovered(){
+		if(Critter.getRandomInt(5)==0) {
+			animateButton.setStyle("-fx-background-color: bisque; ");
+		}
+		else if(Critter.getRandomInt(5)==1) {
+			animateButton.setStyle("-fx-background-color: blueviolet; ");
+		}
+		else if(Critter.getRandomInt(5)==2) {
+			animateButton.setStyle("-fx-background-color: cadetblue; ");
+		}
+		else if(Critter.getRandomInt(5)==3) {
+			animateButton.setStyle("-fx-background-color: cyan; ");
+		}
+		else if(Critter.getRandomInt(5)==4) {
+			animateButton.setStyle("-fx-background-color: fuchsia; ");
+		}
+
+	}
+    
+    public void SetButtonHovered(){
+		if(Critter.getRandomInt(5)==0) {
+			setWorldButton.setStyle("-fx-background-color: indigo; ");
+		}
+		else if(Critter.getRandomInt(5)==1) {
+	     	setWorldButton.setStyle("-fx-background-color: khaki; ");
+		}
+		else if(Critter.getRandomInt(5)==2) {
+			setWorldButton.setStyle("-fx-background-color: lavender; ");
+		}
+		else if(Critter.getRandomInt(5)==3) {
+			setWorldButton.setStyle("-fx-background-color: mintcream; ");
+		}
+		else if(Critter.getRandomInt(5)==4) {
+			setWorldButton.setStyle("-fx-background-color: orchid; ");
+		}
+
+	}
+    
+    public void GoButtonHovered(){
+		if(Critter.getRandomInt(5)==0) {
+			goButton.setStyle("-fx-background-color: sienna; ");
+		}
+		else if(Critter.getRandomInt(5)==1) {
+			goButton.setStyle("-fx-background-color: snow; ");
+		}
+		else if(Critter.getRandomInt(5)==2) {
+			goButton.setStyle("-fx-background-color: lightgray; ");
+		}
+		else if(Critter.getRandomInt(5)==3) {
+			goButton.setStyle("-fx-background-color: coral; ");
+		}
+		else if(Critter.getRandomInt(5)==4) {
+			goButton.setStyle("-fx-background-color: orange; ");
+		}
+
+	}
+    
+	
 	public void CreateButtonPressed () {
 		textNum.setPromptText("How many?");
 		CritterText.setPromptText("What Critter?");
@@ -238,6 +373,16 @@ public class CritterController {
 	
 	public void clearButtonPressed() {
 		Critter.clearWorld();
+		CreateButton.setStyle(null);
+		stepButton.setStyle(null);
+		seedButton.setStyle(null);
+		animateButton.setStyle(null);
+		setWorldButton.setStyle(null);
+		clearButton.setStyle(null);
+		quitButton.setStyle(null);
+		clearButton.setStyle(null);
+		goButton.setStyle(null);
+		
 		Critter.displayWorld(Main.root);
 	}
 	
