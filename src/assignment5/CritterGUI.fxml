@@ -1,30 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.shape.Circle?>
-<?import javafx.scene.shape.Polygon?>
-<?import javafx.scene.shape.Rectangle?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="assignment5.CritterController">
-   <bottom>
-      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-            <Polygon fx:id="star" fill="DODGERBLUE" layoutX="246.0" layoutY="134.0" points="-57.99998474121094, -6.200019836425781, -85.19999694824219, -21.20001983642578, -108.40000915527344, -6.200019836425781, -108.40000915527344, -34.20001983642578, -128.40000915527344, -58.00000762939453, -98.79997253417969, -58.00000762939453, -85.19999694824219, -90.00000762939453, -74.79997253417969, -58.00000762939453, -42.79997253417969, -58.00000762939453, -65.99998474121094, -34.20001983642578" scaleX="0.5" scaleY="0.5" scaleZ="0.5" stroke="BLACK" strokeType="INSIDE" />
-            <Rectangle fx:id="square" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" layoutX="43.0" layoutY="60.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
-            <Polygon fx:id="tri" fill="DODGERBLUE" layoutX="74.0" layoutY="134.0" points="-24.60003662109375, 40.0, 21.79998779296875, 40.0, -2.20001220703125, 0.20000457763671875" stroke="BLACK" strokeType="INSIDE" />
-            <Rectangle fx:id="dia" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" layoutX="145.0" layoutY="139.0" rotate="45.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
-            <Circle fx:id="circle" fill="DODGERBLUE" layoutX="104.0" layoutY="55.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-         </children>
-      </Pane>
-   </bottom>
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="assignment5.CritterController">
    <left>
-      <GridPane fx:id="root" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" BorderPane.alignment="CENTER">
+      <GridPane fx:id="root" alignment="CENTER" hgap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" vgap="5.0" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" />
@@ -37,16 +25,24 @@
           <RowConstraints maxHeight="1.7976931348623157E308" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="1.7976931348623157E308" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="CreateButton" mnemonicParsing="false" onAction="#CreateButtonPressed" prefHeight="26.0" prefWidth="70.0" text="Create" GridPane.columnIndex="1" />
-            <TextField fx:id="textNum" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="47.0" promptText="How many?" GridPane.columnIndex="2" />
+            <Button fx:id="CreateButton" mnemonicParsing="false" onAction="#CreateButtonPressed" prefHeight="26.0" prefWidth="80.0" text="Create" GridPane.columnIndex="1" />
+            <TextField fx:id="textNum" minHeight="-Infinity" minWidth="-Infinity" promptText="How many?" GridPane.columnIndex="2" />
             <TextField fx:id="CritterText" promptText="What Critter?" GridPane.columnIndex="3" />
-            <Button fx:id="stepButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#stepButtonPressed" prefHeight="26.0" prefWidth="70.0" text="Step" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button fx:id="stepButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#stepButtonPressed" prefHeight="26.0" prefWidth="80.0" text="Step" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="stepText" minHeight="-Infinity" minWidth="-Infinity" promptText="How many Steps?" GridPane.columnIndex="3" GridPane.rowIndex="1" />
             <TextField fx:id="seedText" layoutX="210.0" layoutY="95.0" promptText="Seed #" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-            <Button fx:id="seedButton" mnemonicParsing="false" onAction="#seedButtonPressed" prefHeight="26.0" prefWidth="70.0" text="Set Seed" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button fx:id="quitButton" mnemonicParsing="false" onAction="#quitButtonPressed" prefHeight="26.0" prefWidth="70.0" text="Quit" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Button fx:id="seedButton" mnemonicParsing="false" onAction="#seedButtonPressed" prefHeight="26.0" prefWidth="80.0" text="Set Seed" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button fx:id="quitButton" mnemonicParsing="false" onAction="#quitButtonPressed" prefHeight="26.0" prefWidth="80.0" text="Quit" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label text="Critter Stats" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+            <TextField fx:id="statsCritterText" promptText="What Critter?" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+            <Button fx:id="goButton" mnemonicParsing="false" text="Go" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+            <TextArea fx:id="statsText" prefHeight="99.0" prefWidth="134.0" GridPane.columnIndex="2" GridPane.rowIndex="8" />
          </children>
       </GridPane>
    </left>
@@ -60,4 +56,7 @@
         </rowConstraints>
       </GridPane>
    </right>
+   <bottom>
+      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </bottom>
 </BorderPane>
