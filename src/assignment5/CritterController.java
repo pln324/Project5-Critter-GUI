@@ -207,7 +207,7 @@ public class CritterController {
 	    
 		int loop;
 	    try {
-			loop = Integer.parseInt(stepText.getText());
+			loop = Integer.parseInt(aniSpeed.getText());
 		}
 		catch(NullPointerException|NumberFormatException e) {
 			loop = 1;
@@ -232,6 +232,7 @@ public class CritterController {
 	    setWorldButton.setDisable(false);
 	    worldWidthText.setDisable(false);
 	    worldHeightText.setDisable(false);
+	    clearButton.setDisable(false);
 	    animate = false;
 	}
 	
@@ -242,7 +243,7 @@ public class CritterController {
 	
 	public static Shape toShape(Critter me) {
 		Shape solution;
-		int size = Math.min(1000/Params.WORLD_WIDTH, 1000/Params.WORLD_HEIGHT);
+		int size = Math.min(850/Params.WORLD_WIDTH, 850/Params.WORLD_HEIGHT);
 		switch(me.viewShape()) {
 		case CIRCLE:
 			solution = new Circle(size/2);

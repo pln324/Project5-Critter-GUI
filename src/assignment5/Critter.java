@@ -149,7 +149,7 @@ public abstract class Critter {
     	root.setRight(world);
 		world.setPrefHeight(Params.WORLD_HEIGHT*5);
         world.setPrefWidth(Params.WORLD_WIDTH*5);
-        int size = Math.min(1000/Params.WORLD_WIDTH, 1000/Params.WORLD_HEIGHT);
+        int size = Math.min(800/Params.WORLD_WIDTH, 850/Params.WORLD_HEIGHT);
         for (int i = 0; i < Params.WORLD_WIDTH; i++) {
             ColumnConstraints colConst = new ColumnConstraints();
             colConst.setMinWidth(size);
