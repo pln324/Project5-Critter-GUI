@@ -21,6 +21,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -147,8 +149,8 @@ public abstract class Critter {
     	GridPane world = new GridPane();
     	world.setGridLinesVisible(true);
     	root.setRight(world);
-		world.setPrefHeight(Params.WORLD_HEIGHT*5);
-        world.setPrefWidth(Params.WORLD_WIDTH*5);
+		world.setPrefHeight(10);
+        world.setPrefWidth(10);
         for (int i = 0; i < Params.WORLD_WIDTH; i++) {
             ColumnConstraints colConst = new ColumnConstraints();
             colConst.setMinWidth(800/Params.WORLD_WIDTH);
