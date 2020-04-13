@@ -21,8 +21,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -149,16 +147,17 @@ public abstract class Critter {
     	GridPane world = new GridPane();
     	world.setGridLinesVisible(true);
     	root.setRight(world);
-		world.setPrefHeight(10);
-        world.setPrefWidth(10);
+		world.setPrefHeight(Params.WORLD_HEIGHT*5);
+        world.setPrefWidth(Params.WORLD_WIDTH*5);
+        int size = Math.min(1000/Params.WORLD_WIDTH, 1000/Params.WORLD_HEIGHT);
         for (int i = 0; i < Params.WORLD_WIDTH; i++) {
             ColumnConstraints colConst = new ColumnConstraints();
-            colConst.setMinWidth(800/Params.WORLD_WIDTH);
+            colConst.setMinWidth(size);
             world.getColumnConstraints().add(colConst);
         }
         for (int i = 0; i < Params.WORLD_HEIGHT; i++) {
             RowConstraints rowConst = new RowConstraints();
-            rowConst.setMinHeight(800/Params.WORLD_WIDTH);
+            rowConst.setMinHeight(size);
             world.getRowConstraints().add(rowConst);   
         }
         for(int i=0;i<population.size();i++) {

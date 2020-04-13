@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
@@ -11,15 +10,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="631.0" prefWidth="555.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="assignment5.CritterController">
-   <bottom>
-      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="BOTTOM_CENTER">
-         <BorderPane.margin>
-            <Insets />
-         </BorderPane.margin></Pane>
-   </bottom>
-   <center>
-      <GridPane fx:id="root" alignment="TOP_CENTER" hgap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" vgap="5.0" BorderPane.alignment="CENTER">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="assignment5.CritterController">
+   <left>
+      <GridPane fx:id="root" alignment="CENTER" hgap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" vgap="5.0" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" />
@@ -30,51 +23,46 @@
           <RowConstraints maxHeight="1.7976931348623157E308" vgrow="SOMETIMES" />
           <RowConstraints maxHeight="1.7976931348623157E308" vgrow="SOMETIMES" />
           <RowConstraints maxHeight="1.7976931348623157E308" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="1.7976931348623157E308" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="140.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <Button fx:id="CreateButton" mnemonicParsing="false" onAction="#CreateButtonPressed" onMouseEntered="#CreateButtonHovered" prefHeight="26.0" prefWidth="80.0" text="Create" GridPane.columnIndex="1" />
             <TextField fx:id="textNum" minHeight="-Infinity" minWidth="-Infinity" promptText="How many?" GridPane.columnIndex="2" />
-            <TextField fx:id="CritterText" promptText="What Critter?" GridPane.columnIndex="3">
-               <GridPane.margin>
-                  <Insets right="5.0" />
-               </GridPane.margin></TextField>
+            <TextField fx:id="CritterText" promptText="What Critter?" GridPane.columnIndex="3" />
             <Button fx:id="stepButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#stepButtonPressed" prefHeight="26.0" prefWidth="80.0" text="Step" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="stepText" minHeight="-Infinity" minWidth="-Infinity" promptText="How many Steps?" GridPane.columnIndex="3" GridPane.rowIndex="1">
-               <GridPane.margin>
-                  <Insets right="5.0" />
-               </GridPane.margin></TextField>
-            <TextField fx:id="seedText" layoutX="210.0" layoutY="95.0" promptText="Seed #" GridPane.columnIndex="3" GridPane.rowIndex="2">
-               <GridPane.margin>
-                  <Insets right="5.0" />
-               </GridPane.margin></TextField>
+            <TextField fx:id="stepText" minHeight="-Infinity" minWidth="-Infinity" promptText="How many Steps?" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <TextField fx:id="seedText" layoutX="210.0" layoutY="95.0" promptText="Seed #" GridPane.columnIndex="2" GridPane.rowIndex="2" />
             <Button fx:id="seedButton" mnemonicParsing="false" onAction="#seedButtonPressed" prefHeight="26.0" prefWidth="80.0" text="Set Seed" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button fx:id="quitButton" mnemonicParsing="false" onAction="#quitButtonPressed" prefHeight="26.0" prefWidth="80.0" text="Quit" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Label text="Critter Stats" GridPane.columnIndex="2" GridPane.rowIndex="8" />
-            <TextField fx:id="statsCritterText" promptText="What Critter?" GridPane.columnIndex="2" GridPane.rowIndex="9" />
-            <Button fx:id="goButton" mnemonicParsing="false" text="Go" GridPane.columnIndex="3" GridPane.rowIndex="9" />
-            <TextArea fx:id="statsText" prefHeight="99.0" prefWidth="134.0" GridPane.columnIndex="2" GridPane.rowIndex="10" />
-            <Button fx:id="setWorldButton" mnemonicParsing="false" onAction="#setWorldButtonPressed" prefHeight="27.0" prefWidth="79.0" text="Set" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <TextField fx:id="worldWidthText" prefHeight="27.0" prefWidth="63.0" promptText="World Width?" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-            <TextField fx:id="worldHeightText" promptText="World Height?" GridPane.columnIndex="3" GridPane.rowIndex="6">
-               <GridPane.margin>
-                  <Insets right="5.0" />
-               </GridPane.margin></TextField>
+            <Button fx:id="quitButton" mnemonicParsing="false" onAction="#quitButtonPressed" prefHeight="26.0" prefWidth="80.0" text="Quit" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Label text="Critter Stats" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+            <TextField fx:id="statsCritterText" promptText="What Critter?" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+            <Button fx:id="goButton" mnemonicParsing="false" onAction="#updateStats" text="Go" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+            <TextArea fx:id="statsText" prefHeight="99.0" prefWidth="134.0" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+            <Button fx:id="animateButton" mnemonicParsing="false" onAction="#animate" prefHeight="26.0" prefWidth="80.0" text="Animate" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Button fx:id="stopAnimation" mnemonicParsing="false" onAction="#stopAnimate" prefHeight="26.0" prefWidth="80.0" text="Stop" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="aniSpeed" promptText="Steps per frame?" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <Button fx:id="setWorldButton" mnemonicParsing="false" onAction="#setWorldButtonPressed" prefHeight="26.0" prefWidth="80.0" text="Set" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="worldWidthText" promptText="World Width?" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <TextField fx:id="worldHeightText" promptText="World Height?" GridPane.columnIndex="3" GridPane.rowIndex="4" />
          </children>
       </GridPane>
-   </center>
+   </left>
    <right>
-      <Pane prefHeight="192.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <BorderPane.margin>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </BorderPane.margin>
-      </Pane>
+      <GridPane gridLinesVisible="true" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="30.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+      </GridPane>
    </right>
+   <bottom>
+      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </bottom>
 </BorderPane>
