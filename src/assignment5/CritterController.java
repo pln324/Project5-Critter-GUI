@@ -99,6 +99,7 @@ public class CritterController {
 	public void quitButtonPressed() {
 		System.exit(0);
 	}
+	
 	public Shape toShape(Critter me) {
 		switch(me.viewShape()) {
 		//case()
