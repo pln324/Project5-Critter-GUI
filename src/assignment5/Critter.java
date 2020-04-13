@@ -151,12 +151,12 @@ public abstract class Critter {
         world.setPrefWidth(Params.WORLD_WIDTH*5);
         for (int i = 0; i < Params.WORLD_WIDTH; i++) {
             ColumnConstraints colConst = new ColumnConstraints();
-            colConst.setMinWidth(1000/Params.WORLD_WIDTH);
+            colConst.setMinWidth(800/Params.WORLD_WIDTH);
             world.getColumnConstraints().add(colConst);
         }
         for (int i = 0; i < Params.WORLD_HEIGHT; i++) {
             RowConstraints rowConst = new RowConstraints();
-            rowConst.setMinHeight(1000/Params.WORLD_WIDTH);
+            rowConst.setMinHeight(800/Params.WORLD_WIDTH);
             world.getRowConstraints().add(rowConst);   
         }
         for(int i=0;i<population.size();i++) {

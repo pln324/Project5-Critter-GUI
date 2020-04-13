@@ -20,7 +20,7 @@ public class Main extends Application {
 		try {
 			root = (BorderPane)FXMLLoader.load(getClass().getResource("CritterGUI.fxml"));
 			Scene scene = new Scene(root);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+//			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 //			world = (GridPane)root.getRight();
 //			world.setPrefHeight(Params.WORLD_HEIGHT*5);
 //	        world.setPrefWidth(Params.WORLD_WIDTH*5);

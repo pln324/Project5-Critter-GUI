@@ -32,6 +32,12 @@ public class CritterController {
 	    @FXML
 	    private TextField seedText;
 	    @FXML
+	    private Button setWorldButton;
+	    @FXML 
+	    private TextField worldWidthText;
+	    @FXML
+	    private TextField worldHeightText;
+	    @FXML
 	    private Button stepButton;
 	    @FXML
 	    private Button seedButton;
@@ -95,7 +101,7 @@ public class CritterController {
 	
 	public static Shape toShape(Critter me) {
 		Shape solution;
-		int size = 1000/Params.WORLD_HEIGHT;
+		int size = 800/Params.WORLD_HEIGHT;
 
 		switch(me.viewShape()) {
 		case CIRCLE:
@@ -128,6 +134,23 @@ public class CritterController {
 		System.exit(0);
 	}
 	
+	public void setWorldButtonPressed() {
+		worldWidthText.setPromptText("World Width?");
+		worldHeightText.setPromptText("World Height?");
+		try {
+			int width = Integer.parseInt(worldWidthText.getText());
+			int height = Integer.parseInt(worldHeightText.getText());
+			Params.WORLD_WIDTH = width;
+			Params.WORLD_HEIGHT = height;
+			Critter.displayWorld(Main.root);			
+		}
+		catch(Exception e){
+			worldWidthText.clear();
+			worldHeightText.clear();
+			worldWidthText.setPromptText("Not a Number!!!");
+			worldHeightText.setPromptText("Not a number!!!");
+		}
+	}
 	public boolean isNumeric(String str) { 
 		  try {  
 		    Integer.valueOf(str);  
