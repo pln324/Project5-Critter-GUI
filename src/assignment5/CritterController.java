@@ -52,9 +52,28 @@ public class CritterController {
 	    @FXML
 	    private static Circle circle;
     
+	public void CreateButtonHovered() {
+		if(Critter.getRandomInt(5)==0) {
+			CreateButton.setStyle("-fx-background-color: red; ");
+		}
+		else if(Critter.getRandomInt(5)==1) {
+			CreateButton.setStyle("-fx-background-color: yellow; ");
+		}
+		else if(Critter.getRandomInt(5)==2) {
+			CreateButton.setStyle("-fx-background-color: blue; ");
+		}
+		else if(Critter.getRandomInt(5)==3) {
+			CreateButton.setStyle("-fx-background-color: purple; ");
+		}
+		else if(Critter.getRandomInt(5)==4) {
+			CreateButton.setStyle("-fx-background-color: orange; ");
+		}
+	}
 	public void CreateButtonPressed () {
+		
 		textNum.setPromptText("How many?");
 		CritterText.setPromptText("What Critter?");
+		
 		try {
 			for(int i=0; i<Integer.parseInt(textNum.getText()); i++) {
 				Critter.createCritter(CritterText.getText());

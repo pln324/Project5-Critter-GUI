@@ -40,7 +40,7 @@
             <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="CreateButton" mnemonicParsing="false" onAction="#CreateButtonPressed" prefHeight="26.0" prefWidth="80.0" text="Create" GridPane.columnIndex="1" />
+            <Button fx:id="CreateButton" mnemonicParsing="false" onAction="#CreateButtonPressed" onMouseEntered="#CreateButtonHovered" prefHeight="26.0" prefWidth="80.0" text="Create" GridPane.columnIndex="1" />
             <TextField fx:id="textNum" minHeight="-Infinity" minWidth="-Infinity" promptText="How many?" GridPane.columnIndex="2" />
             <TextField fx:id="CritterText" promptText="What Critter?" GridPane.columnIndex="3">
                <GridPane.margin>
