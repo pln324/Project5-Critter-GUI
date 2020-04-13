@@ -1,10 +1,15 @@
 package assignment5;
 
+import java.util.ArrayList;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.LineTo;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
@@ -12,45 +17,34 @@ import javafx.scene.shape.Shape;
 public class CritterController {
 	  	@FXML
 	    private GridPane root;
-
+	    @FXML
+	    private GridPane world;
 	    @FXML
 	    private Button CreateButton;
-
-	    @FXML
-	    private TextField textNum;
-
-	    @FXML
-	    private TextField CritterText;
-
-	    @FXML
-	    private TextField stepText;
-
-	    @FXML
-	    private TextField seedText;
-	    
-	    @FXML
-	    private Button stepButton;
-	    
-	    @FXML
-	    private Button seedButton;
-	    
 	    @FXML
 	    private Button quitButton;
-	    
 	    @FXML
-	    private Polygon star;
-
+	    private TextField textNum;
 	    @FXML
-	    private Rectangle square;
-
+	    private TextField CritterText;
 	    @FXML
-	    private Polygon tri;
-
+	    private TextField stepText;
 	    @FXML
-	    private Rectangle dia;
-
+	    private TextField seedText;
 	    @FXML
-	    private Circle circle;
+	    private Button stepButton;
+	    @FXML
+	    private Button seedButton;
+	    @FXML
+	    private static Polygon star;
+	    @FXML
+	    private static Rectangle square;
+	    @FXML
+	    private static Polygon tri;
+	    @FXML
+	    private static Rectangle dia;
+	    @FXML
+	    private static Circle circle;
     
 	public void CreateButtonPressed () {
 		textNum.setPromptText("How many?");
@@ -59,6 +53,7 @@ public class CritterController {
 			for(int i=0; i<Integer.parseInt(textNum.getText()); i++) {
 				Critter.createCritter(CritterText.getText());
 			}
+			Critter.displayWorld(Main.root);
 		} catch (InvalidCritterException e) {
 			CritterText.clear();
 			CritterText.setPromptText("not a critter!");
@@ -77,10 +72,12 @@ public class CritterController {
 			/*call worldTimeStep the number of times the user put in the second argument*/
 			for(int i=0;i<loop;i++) {
 				Critter.worldTimeStep();
+				Critter.displayWorld(Main.root);
 			}
 		}
 			catch(NullPointerException|NumberFormatException e) {
 				Critter.worldTimeStep();
+				Critter.displayWorld(Main.root);
 			}
 	}
 	
@@ -96,18 +93,42 @@ public class CritterController {
 		}
 	}
 	
+	public static Shape toShape(Critter me) {
+		Shape solution;
+		int size = 1000/Params.WORLD_HEIGHT;
+
+		switch(me.viewShape()) {
+		case CIRCLE:
+			solution = new Circle(size/2);
+			break;
+		case SQUARE:
+			solution = new Rectangle(size,size);
+			break;
+		case TRIANGLE:
+			solution = new Path(new MoveTo(0,0), new LineTo(-size+2,0), new LineTo(-size/2,-size+2), new LineTo(0,0));
+			break;
+		case DIAMOND:
+			solution = new Path(new MoveTo(0,0), new LineTo(size/2,size/2-2), new LineTo(size-2,0), new LineTo(size/2,-size/2+2), new LineTo(0,0));
+			break;
+		case STAR:
+			solution = new Path(new MoveTo(0,0), new LineTo(size/3+size/25, size/3-size/6), new LineTo(size/2,size/2-2), new LineTo(3*size/4.7, size/3-size/6), new LineTo(size-3,0), new LineTo(3*size/4.7, -size/3+size/6),new LineTo(size/2,-size/2+2), new LineTo(size/3+size/25, -size/3+size/6), new LineTo(0,0));
+			break;
+		default:
+			solution = new Polygon();
+			break;
+		}
+		solution.setFill(me.viewFillColor());
+		solution.setStroke(me.viewOutlineColor());
+		solution.setStrokeWidth(5);
+		//world.add(solution,0,0)
+		return solution;
+	}
+	
 	public void quitButtonPressed() {
 		System.exit(0);
 	}
 	
-	public Shape toShape(Critter me) {
-		switch(me.viewShape()) {
-		//case()
-		}
-		return null;
-	}
-	
-	public static boolean isNumeric(String str) { 
+	public boolean isNumeric(String str) { 
 		  try {  
 		    Integer.valueOf(str);  
 		    return true;
