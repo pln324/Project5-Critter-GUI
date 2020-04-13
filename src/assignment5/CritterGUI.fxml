@@ -11,58 +11,53 @@
 <?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.shape.Rectangle?>
 
-<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="assignment5.CritterController">
-   <right>
-      <GridPane BorderPane.alignment="CENTER">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <Circle fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-         </children>
-      </GridPane>
-   </right>
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="assignment5.CritterController">
    <bottom>
       <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Polygon fill="DODGERBLUE" layoutX="210.0" layoutY="83.0" points="24.0, 43.4000244140625, 36.79998779296875, -20.600013732910156, -12.799972534179688, -60.600013732910156, -63.99998474121094, -20.600013732910156, -43.19999694824219, 43.4000244140625, 24.0, 43.4000244140625, 36.79998779296875, -20.600013732910156, -12.799972534179688, -60.600013732910156, -63.99998474121094, -20.600013732910156, -43.19999694824219, 43.4000244140625" stroke="BLACK" strokeType="INSIDE" />
-            <Polygon fill="DODGERBLUE" layoutX="408.0" layoutY="74.0" points="-55.471641540527344, 20.939435958862305, -4.245959758758545, -13.150818824768066, 3.9189276695251465, 25.950754165649414" rotate="22.1" stroke="BLACK" strokeType="INSIDE" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" layoutX="43.0" layoutY="60.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+            <Polygon fx:id="star" fill="DODGERBLUE" layoutX="246.0" layoutY="134.0" points="-57.99998474121094, -6.200019836425781, -85.19999694824219, -21.20001983642578, -108.40000915527344, -6.200019836425781, -108.40000915527344, -34.20001983642578, -128.40000915527344, -58.00000762939453, -98.79997253417969, -58.00000762939453, -85.19999694824219, -90.00000762939453, -74.79997253417969, -58.00000762939453, -42.79997253417969, -58.00000762939453, -65.99998474121094, -34.20001983642578" scaleX="0.5" scaleY="0.5" scaleZ="0.5" stroke="BLACK" strokeType="INSIDE" />
+            <Rectangle fx:id="square" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" layoutX="43.0" layoutY="60.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+            <Polygon fx:id="tri" fill="DODGERBLUE" layoutX="74.0" layoutY="134.0" points="-24.60003662109375, 40.0, 21.79998779296875, 40.0, -2.20001220703125, 0.20000457763671875" stroke="BLACK" strokeType="INSIDE" />
+            <Rectangle fx:id="dia" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" layoutX="145.0" layoutY="139.0" rotate="45.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+            <Circle fx:id="circle" fill="DODGERBLUE" layoutX="104.0" layoutY="55.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
          </children>
       </Pane>
    </bottom>
    <left>
-      <GridPane fx:id="root" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="157.0" prefWidth="386.0" BorderPane.alignment="CENTER">
+      <GridPane fx:id="root" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" BorderPane.alignment="CENTER">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="294.4000244140625" minWidth="10.0" prefWidth="51.7999755859375" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="294.4000244140625" minWidth="10.0" prefWidth="82.00003662109376" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="529.5999755859375" minWidth="10.0" prefWidth="95.4000244140625" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="529.5999755859375" minWidth="10.0" prefWidth="128.39995117187502" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="529.5999755859375" minWidth="10.0" prefWidth="38.800048828125" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" />
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints maxHeight="135.00000610351563" minHeight="10.0" prefHeight="60.400000000000006" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="135.00000610351563" minHeight="10.0" prefHeight="60.400000000000006" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="162.20001831054688" minHeight="10.0" prefHeight="62.8" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="135.60001220703123" minHeight="10.0" prefHeight="61.999981689453136" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="135.60001220703123" minHeight="10.0" prefHeight="61.999981689453136" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="1.7976931348623157E308" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="1.7976931348623157E308" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="1.7976931348623157E308" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="1.7976931348623157E308" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="CreateButton" mnemonicParsing="false" onAction="#CreateButtonPressed" prefHeight="26.0" prefWidth="70.0" text="Create" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="textNum" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="47.0" promptText="How many?" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <TextField fx:id="CritterText" promptText="What Critter?" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-            <Button fx:id="stepButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#stepButtonPressed" prefHeight="26.0" prefWidth="70.0" text="Step" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField fx:id="stepText" promptText="How many Steps?" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-            <TextField fx:id="seedText" layoutX="210.0" layoutY="95.0" promptText="Seed #" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-            <Button fx:id="seedButton" mnemonicParsing="false" onAction="#seedButtonPressed" prefHeight="26.0" prefWidth="70.0" text="Set Seed" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Button fx:id="quitButton" mnemonicParsing="false" onAction="#quitButtonPressed" prefHeight="28.0" prefWidth="70.0" text="Quit" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Button fx:id="CreateButton" mnemonicParsing="false" onAction="#CreateButtonPressed" prefHeight="26.0" prefWidth="70.0" text="Create" GridPane.columnIndex="1" />
+            <TextField fx:id="textNum" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="47.0" promptText="How many?" GridPane.columnIndex="2" />
+            <TextField fx:id="CritterText" promptText="What Critter?" GridPane.columnIndex="3" />
+            <Button fx:id="stepButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#stepButtonPressed" prefHeight="26.0" prefWidth="70.0" text="Step" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="stepText" minHeight="-Infinity" minWidth="-Infinity" promptText="How many Steps?" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <TextField fx:id="seedText" layoutX="210.0" layoutY="95.0" promptText="Seed #" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <Button fx:id="seedButton" mnemonicParsing="false" onAction="#seedButtonPressed" prefHeight="26.0" prefWidth="70.0" text="Set Seed" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button fx:id="quitButton" mnemonicParsing="false" onAction="#quitButtonPressed" prefHeight="26.0" prefWidth="70.0" text="Quit" GridPane.columnIndex="1" GridPane.rowIndex="4" />
          </children>
       </GridPane>
    </left>
+   <right>
+      <GridPane gridLinesVisible="true" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="30.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+      </GridPane>
+   </right>
 </BorderPane>

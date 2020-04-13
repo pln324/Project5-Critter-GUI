@@ -14,7 +14,6 @@
 package assignment5;
 
 import java.lang.reflect.Constructor;
-
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,7 +22,9 @@ import java.util.Map;
 import java.util.Random;
 
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
@@ -112,20 +113,6 @@ public abstract class Critter {
  			break;
  		}
     	
-    	/*corner cases*/
-		if(this.x_coord>Params.WORLD_WIDTH-1) {				
-			this.x_coord -= Params.WORLD_WIDTH;
-		}
-		if(this.x_coord<0) {
-			this.x_coord += Params.WORLD_WIDTH;
-		}
-		if(this.y_coord>Params.WORLD_HEIGHT-1) {
-			this.y_coord -= Params.WORLD_HEIGHT;
-		}
-		if(this.y_coord<0) {
-			this.y_coord += Params.WORLD_HEIGHT;
-		}
-		
     	for (int i=0; i<population.size(); i++) {
 			if (population.get(i).x_coord == x_view && population.get(i).y_coord == y_view) {
 				return population.get(i).toString();
@@ -156,16 +143,37 @@ public abstract class Critter {
 
 
     public static void displayWorld(Object pane) {
-        GridPane world = (GridPane)pane;
-        for(int i=0; i<Params.WORLD_HEIGHT;i++) {
-        	for(int j=0; j<Params.WORLD_WIDTH; j++) {
-        		world.add(null, j, i);
-        	}
+    	BorderPane root = (BorderPane) pane;
+    	GridPane world = new GridPane();
+    	world.setGridLinesVisible(true);
+    	root.setRight(world);
+		world.setPrefHeight(Params.WORLD_HEIGHT*5);
+        world.setPrefWidth(Params.WORLD_WIDTH*5);
+        for (int i = 0; i < Params.WORLD_WIDTH; i++) {
+            ColumnConstraints colConst = new ColumnConstraints();
+            colConst.setMinWidth(1000/Params.WORLD_WIDTH);
+            world.getColumnConstraints().add(colConst);
         }
-    /*    for(int i=0;i<population.size();i++) {
-    		world.add(population.get(i).viewShape(),population.get(i).x_coord,population.get(i).y_coord);
-    	}*/
-        
+        for (int i = 0; i < Params.WORLD_HEIGHT; i++) {
+            RowConstraints rowConst = new RowConstraints();
+            rowConst.setMinHeight(1000/Params.WORLD_WIDTH);
+            world.getRowConstraints().add(rowConst);   
+        }
+        for(int i=0;i<population.size();i++) {
+        	world.add(CritterController.toShape(population.get(i)),population.get(i).x_coord,population.get(i).y_coord);
+    	}
+        for(int i=0;i<population.size();i++) {
+    		for(int j=i+1;j<population.size();j++) {
+    			if((population.get(i).x_coord==population.get(j).x_coord&&population.get(i).y_coord == population.get(j).y_coord)) {
+    				if(population.get(i).getEnergy()>population.get(j).energy) {
+    					world.add(CritterController.toShape(population.get(i)),population.get(i).x_coord,population.get(i).y_coord);
+    				}
+    				else {
+    					world.add(CritterController.toShape(population.get(j)),population.get(i).x_coord,population.get(i).y_coord);
+    				}
+    			}
+    		}
+    	}
     }
 
 	/* END --- NEW FOR PROJECT 5
@@ -197,8 +205,6 @@ public abstract class Critter {
         rand = new Random(new_seed);
     }
 
-    
-    
     /**
      * create and initialize a Critter subclass.
      * critter_class_name must be the qualified name of a concrete
@@ -210,7 +216,6 @@ public abstract class Critter {
      */
     public static void createCritter(String critter_class_name)
             throws InvalidCritterException {
-    	
     	Class<?> myCritter = null;
 		Constructor<?> constructor = null;
 		Object instanceOfMyCritter = null;
@@ -239,11 +244,8 @@ public abstract class Critter {
 		me.y_coord = Critter.getRandomInt(Params.WORLD_HEIGHT);
 		/*add the newly created critter to the population*/
 		population.add(me);
-
     }
 
-    
-    
     /**
      * Gets a list of critters of a specific type.
      *
@@ -254,7 +256,6 @@ public abstract class Critter {
      */
     public static List<Critter> getInstances(String critter_class_name)
             throws InvalidCritterException {
-
     	List<Critter> sameKind = new ArrayList<Critter>();
     	Class<?> newCri;
     	try {
@@ -271,8 +272,6 @@ public abstract class Critter {
         return sameKind;
     }
 
-    
-    
     /**
      * Clear the world of all critters, dead and alive
      */
@@ -282,7 +281,7 @@ public abstract class Critter {
     }
 
     public static void worldTimeStep() {
-
+    	/*call doTimeStep for every critter in the world*/
     	for (int i=0; i<population.size(); i++) {
     		population.get(i).hasMoved = false;
     		population.get(i).doTimeStep();
@@ -313,7 +312,6 @@ public abstract class Critter {
     	/*all all babies into the world*/ 
     	population.addAll(babies);
     	babies.clear();
-
     }
     
     /**
@@ -379,14 +377,11 @@ public abstract class Critter {
     private static boolean collision(Critter a, Critter b) {
     	if (a.x_coord == b.x_coord && a.y_coord == b.y_coord && b.energy>0) return true;
     	else return false;
-
     }
-    
+
     public abstract void doTimeStep();
 
     public abstract boolean fight(String oponent);
-    
-    private boolean hasMoved=false;
 
     /* a one-character long string that visually depicts your critter
      * in the ASCII interface */
@@ -398,73 +393,62 @@ public abstract class Critter {
         return energy;
     }
 
-
-    /**
-     * Allows critter to move one step in any direction, called in do time step
-     * 
-     * @param direction Indicates direction traveled
-     */
-    protected final void walk(int direction) {
-    	
-        if (hasMoved == false) {
-        	this.energy -= Params.WALK_ENERGY_COST;
-
-        		switch(direction) {
-        		case 0:
-        			this.x_coord +=1;	//right
-        			break;
-        		case 1:
-        			this.x_coord +=1;	//diagonally up right
-        			this.y_coord -=1;
-        			break;
-        		case 2:
-        			this.y_coord -=1;	//up
-        			break;
-        		case 3:
-        			this.x_coord -=1;	//diagonally up left
-        			this.y_coord -=1;
-        			break;
-        		case 4:
-        			this.x_coord -=1;   //left
-        			break;
-        		case 5:
-        			this.x_coord -=1;	//diagonally down left
-        			this.y_coord +=1;
-        			break;
-        		case 6:
-        			this.y_coord +=1; 	//down
-        			break;
-        		case 7:
-        			this.x_coord +=1;	//diagonally down right
-        			this.y_coord +=1;
-        			break;
-        		}
-
-        	
-        		//wrap around cases
-        		if(this.x_coord>Params.WORLD_WIDTH-1) {				
-        			this.x_coord -= Params.WORLD_WIDTH;
-        		}
-        		if(this.x_coord<0) {
-        			this.x_coord += Params.WORLD_WIDTH;
-        		}
-        		if(this.y_coord>Params.WORLD_HEIGHT-1) {
-        			this.y_coord -= Params.WORLD_HEIGHT;
-        		}
-        		if(this.y_coord<0) {
-        			this.y_coord += Params.WORLD_HEIGHT;
-        		}
-        		hasMoved = true;
-        	}
-    }
+    private boolean hasMoved=false;
     
-    /**
-     * Allows critter to move two spaces in any direction, called from doTimeStep
-     * 
-     * @param direction Indicates direction traveled
-     */
-    protected final void run(int direction) {
+    protected final void walk(int direction) {
+    	 if (hasMoved == false) {
+         	this.energy -= Params.WALK_ENERGY_COST;
 
+         		switch(direction) {
+         		case 0:
+         			this.x_coord +=1;	//right
+         			break;
+         		case 1:
+         			this.x_coord +=1;	//diagonally up right
+         			this.y_coord -=1;
+         			break;
+         		case 2:
+         			this.y_coord -=1;	//up
+         			break;
+         		case 3:
+         			this.x_coord -=1;	//diagonally up left
+         			this.y_coord -=1;
+         			break;
+         		case 4:
+         			this.x_coord -=1;   //left
+         			break;
+         		case 5:
+         			this.x_coord -=1;	//diagonally down left
+         			this.y_coord +=1;
+         			break;
+         		case 6:
+         			this.y_coord +=1; 	//down
+         			break;
+         		case 7:
+         			this.x_coord +=1;	//diagonally down right
+         			this.y_coord +=1;
+         			break;
+         		}
+
+         	
+         		//wrap around cases
+         		if(this.x_coord>Params.WORLD_WIDTH-1) {				
+         			this.x_coord -= Params.WORLD_WIDTH;
+         		}
+         		if(this.x_coord<0) {
+         			this.x_coord += Params.WORLD_WIDTH;
+         		}
+         		if(this.y_coord>Params.WORLD_HEIGHT-1) {
+         			this.y_coord -= Params.WORLD_HEIGHT;
+         		}
+         		if(this.y_coord<0) {
+         			this.y_coord += Params.WORLD_HEIGHT;
+         		}
+         		hasMoved = true;
+    	 }
+    }
+
+    protected final void run(int direction) {
     	if (hasMoved == false) {
     		this.energy -= Params.RUN_ENERGY_COST;
 
@@ -515,17 +499,8 @@ public abstract class Critter {
         		hasMoved = true;
     	}
     }
-    
-    /**
-     * Allows critter to reproduce. Gives offspring appropriate 
-     * amount of energy and adds it to babies List. Checks to
-     * make sure parent has enough energy first.
-     * 
-     * @param offspring "Child" to be created if possible
-     * @param direction Space where child will be after creation (within one space of parent)
-     */
-    protected final void reproduce(Critter offspring, int direction) {
 
+    protected final void reproduce(Critter offspring, int direction) {
     	if(this.energy < Params.MIN_REPRODUCE_ENERGY) {
     		return;
     	}
