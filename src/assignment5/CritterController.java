@@ -23,46 +23,32 @@ import javafx.scene.shape.Shape;
 public class CritterController {
 	@FXML
     private GridPane root;
-
     @FXML
     private Button CreateButton;
-
     @FXML
     private TextField textNum;
-
     @FXML
     private TextField CritterText;
-
     @FXML
     private Button stepButton;
-
     @FXML
     private TextField stepText;
-
     @FXML
     private TextField seedText;
-
     @FXML
     private Button seedButton;
-
     @FXML
     private Button quitButton;
-
     @FXML
     private TextField statsCritterText;
-
     @FXML
     private Button goButton;
-
     @FXML
     private TextArea statsText;
-
     @FXML
     private Button animateButton;
-
     @FXML
     private Button stopAnimation;
-
     @FXML
     private TextField aniSpeed;
     @FXML
@@ -71,7 +57,9 @@ public class CritterController {
     private TextField worldWidthText;
     @FXML
     private TextField worldHeightText;
-	   
+    @FXML
+    private Button clearButton;
+    
     public void CreateButtonHovered() {
 		if(Critter.getRandomInt(5)==0) {
 			CreateButton.setStyle("-fx-background-color: red; ");
@@ -210,9 +198,13 @@ public class CritterController {
 	    seedText.setDisable(true);
 	    stepButton.setDisable(true);
 	    seedButton.setDisable(true);
-	    statsText.setDisable(true);
 	    goButton.setDisable(true);
 	    aniSpeed.setDisable(true);
+	    clearButton.setDisable(true);
+	    setWorldButton.setDisable(true);
+	    worldWidthText.setDisable(true);
+	    worldHeightText.setDisable(true);
+	    
 		int loop;
 	    try {
 			loop = Integer.parseInt(stepText.getText());
@@ -235,10 +227,17 @@ public class CritterController {
 	    seedText.setDisable(false);
 	    stepButton.setDisable(false);
 	    seedButton.setDisable(false);
-	    statsText.setDisable(false);
 	    goButton.setDisable(false);
 	    aniSpeed.setDisable(false);
+	    setWorldButton.setDisable(false);
+	    worldWidthText.setDisable(false);
+	    worldHeightText.setDisable(false);
 	    animate = false;
+	}
+	
+	public void clearButtonPressed() {
+		Critter.clearWorld();
+		Critter.displayWorld(Main.root);
 	}
 	
 	public static Shape toShape(Critter me) {
@@ -282,6 +281,7 @@ public class CritterController {
 			int height = Integer.parseInt(worldHeightText.getText());
 			Params.WORLD_WIDTH = width;
 			Params.WORLD_HEIGHT = height;
+			Critter.clearWorld();
 			Critter.displayWorld(Main.root);			
 		}
 		catch(Exception e){
