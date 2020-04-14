@@ -1,3 +1,11 @@
+/* CRITTERS Critter1.java
+ * EE422C Project 5 submission by
+ * Kangji Chen
+ * kc36498
+ * 16295
+ * Slip days used: <0>
+ * Spring 2020
+ */
 package assignment5;
 
 /**

@@ -1,3 +1,15 @@
+/* CRITTERS Main.java
+ * EE422C Project 5 submission by
+ * Replace <...> with your actual data.
+ * <Student1 Name>
+ * <Student1 EID>
+ * <Student1 5-digit Unique No.>
+ * Kangji Chen
+ * kc36498
+ * 16295
+ * Slip days used: <0>
+ * Spring 2020
+ */
 package assignment5;
 	
 import java.io.File;
@@ -27,25 +39,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			root = (BorderPane)FXMLLoader.load(getClass().getResource("CritterGUI.fxml"));
-			Scene scene = new Scene(root);
-			
-//			String myPackage = Critter.class.getPackage().toString().split(" ")[1];
-//			Set<String> listFiles = listFiles(myPackage);
-//			ArrayList<String> files = new ArrayList<String>();
-//			for(int i=0; i<listFiles.size(); i++) {
-//				String str = (String)listFiles.toArray()[i];
-//				files.add(str.substring(0, str.lastIndexOf('.')));
-//			}
-//			for(int i=0; i<files.size(); i++) {
-//				if(!Critter.class.isAssignableFrom(Class.forName(myPackage+"."+files.get(i)))){
-//					files.remove(i);
-//				}
-//			}
-//			ComboBox critters = new ComboBox(FXCollections.observableArrayList(files));
-//			GridPane buttons = (GridPane)root.getLeft();
-//			buttons.add(critters, 3, 0);
-			
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			Scene scene = new Scene(root);		
 			Critter.displayWorld(root);
 			primaryStage.setScene(scene);
 			primaryStage.show();
