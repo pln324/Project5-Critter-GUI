@@ -84,7 +84,7 @@ public class Critter3 extends Critter{
 		return CritterShape.STAR;
 	}
 	
-	public javafx.scene.paint.Color viewColor() {
+	public javafx.scene.paint.Color viewOutlineColor() {
         return javafx.scene.paint.Color.GOLD;
     }
 
